@@ -1,7 +1,7 @@
 {
-  "name": "npm-template",
-  "version": "1.0.3",
-  "description": "A template repo for npm packages",
+  "name": "@shgysk8zer0/npm-utils",
+  "version": "1.0.0",
+  "description": "A collection of helpful functions for npm packages.",
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0"
@@ -36,5 +36,8 @@
   "devDependencies": {
     "eslint": "^8.41.0",
     "rollup": "^3.23.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   }
 }
