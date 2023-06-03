@@ -1,5 +1,5 @@
 {
-  "name": "npm-utils",
+  "name": "@shgysk8zer0/npm-utils",
   "version": "1.0.0",
   "description": "A collection of helpful functions for npm packages.",
   "main": "index.js",
