@@ -1,12 +1,16 @@
 {
   "name": "@shgysk8zer0/npm-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of helpful functions for npm packages.",
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0"
   },
   "type": "module",
+  "exports": {
+    "require": "index.cjs",
+    "import": "index.js"
+  },
   "private": false,
   "scripts": {
     "test": "npm run lint:js && npm run build",
