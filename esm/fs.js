@@ -1,9 +1,15 @@
 /* eslint-env node */
 import { constants } from 'node:fs';
-import { readFile as rf,  writeFile as wf, stat, realpath } from 'node:fs/promises';
+import { readFile as rf,  writeFile as wf, stat, realpath, readdir } from 'node:fs/promises';
 import { extname } from 'node:path';
 
 export const ENCODING = 'utf8';
+
+export async function listDirByExt(dir, ext, { encoding = ENCODING } = {}) {
+	const files = await readdir(dir, { withFileTypes: true, encoding });
+	return  files.filter(file => file.isFile() && extname(file.name) === ext)
+		.map(({ name }) => `${dir}${name}`);
+}
 
 export async function readFile(path, { encoding = ENCODING, signal } = {}) {
 	return rf(path, { encoding, signal });
