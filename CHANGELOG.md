@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.2] - 2023-06-05
+
+### Added
+- Several new modules for extensions, mime-types and other constants
+- New functionality in `importmap` module to be compatible with `@shgysk8zer0/rollup-import`
+
 ## [v1.0.1] - 2023-06-03
 
 ### Added

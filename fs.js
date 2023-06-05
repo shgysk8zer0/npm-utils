@@ -1,3 +1,4 @@
+/* eslint-env node */
 import { constants } from 'node:fs';
 import { readFile as rf,  writeFile as wf, stat, realpath } from 'node:fs/promises';
 import { extname } from 'node:path';
@@ -26,6 +27,15 @@ export async function realPath(path) {
 
 export function getFileExtension(path) {
 	return extname(path);
+}
+
+export function replaceExtension(path, ext) {
+	if (! ext.startsWith('.')) {
+		throw new TypeError(`${ext} must begin with a ".".`);
+	} else {
+		const currExt = getFileExtension(path);
+		return path.replace(currExt, ext);
+	}
 }
 
 export { constants };
