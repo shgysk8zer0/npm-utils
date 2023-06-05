@@ -1,12 +1,12 @@
 {
   "name": "@shgysk8zer0/npm-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of helpful functions for npm packages.",
+  "type": "module",
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0"
   },
-  "type": "module",
   "exports": {
     "require": "index.cjs",
     "import": "index.js"
@@ -15,12 +15,11 @@
   "scripts": {
     "test": "npm run lint:js && npm run build",
     "preversion": "npm test",
-    "prepare": "npm run build:js",
+    "prepare": "npm run build",
     "lint:js": "eslint .",
     "fix:js": "eslint. --fix",
     "build": "npm run build:js",
-    "dev": "rollup -cw",
-    "build:js": "rollup -c",
+    "build:js": "rollup -c rollup.config.js",
     "create:lock": "npm i --package-lock-only",
     "version:bump": "npm run version:bump:patch",
     "version:bump:patch": "npm version --no-git-tag-version patch",
@@ -34,9 +33,9 @@
   "author": "Chris Zuber <admin@kernvalley.us>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shgysk8zer0/npm-template/issues"
+    "url": "https://github.com/shgysk8zer0/npm-utils/issues"
   },
-  "homepage": "https://github.com/shgysk8zer0/npm-template#readme",
+  "homepage": "https://github.com/shgysk8zer0/npm-utils#readme",
   "devDependencies": {
     "eslint": "^8.41.0",
     "rollup": "^3.23.0"

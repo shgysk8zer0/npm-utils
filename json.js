@@ -1,7 +1,13 @@
-import { ENCODING, readFile, writeFile } from './fs.js';
+import { ENCODING, readFile, writeFile, getFileExtension } from './fs.js';
+export { JSON as MIMES } from './mimes.js';
+import { JSON as EXTS } from './exts.js';
 
-const SPACES = 2;
-export const JSON_EXTS = ['.json'];
+export const SPACES = 2;
+
+export function isJSONFile(path) {
+	const ext = getFileExtension(path);
+	return EXTS.includes(ext);
+}
 
 export async function readJSONFile(path, { encoding = ENCODING, signal } = {}) {
 	const content = await readFile(path, { encoding, signal });
@@ -17,3 +23,5 @@ export async function writeJSONFile(path, data, {
 	const json = JSON.stringify(data, replacer, spaces);
 	await writeFile(path, json, { encoding, signal });
 }
+
+export { ENCODING };
