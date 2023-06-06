@@ -4,7 +4,7 @@
 export const TEXT = ['text/plain'];
 export const HTML = ['text/html'];
 export const CSS = ['text/css'];
-export const JS = ['application/javascript'];
+export const JS = ['application/javascript', 'text/javascript'];
 export const JSON = ['application/json'];
 export const XML = ['application/xml'];
 export const JSON_LD = ['application/ld+json'];

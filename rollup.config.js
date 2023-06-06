@@ -14,7 +14,6 @@ export default {
 	output: {
 		dir: './cjs/',
 		format: 'cjs',
-		// preserveModules: true,
 		entryFileNames: '[name].cjs',
 	},
 };
