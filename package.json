@@ -1,24 +1,25 @@
 {
   "name": "@shgysk8zer0/npm-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A collection of helpful functions for npm packages.",
   "type": "module",
-  "main": "index.js",
+  "main": "cjs/index.cjs",
+  "module": "index.js",
   "engines": {
     "node": ">=18.0.0"
   },
   "exports": {
     ".": {
-      "require": "./modules/index.cjs",
+      "require": "./cjs/index.cjs",
       "import": "index.js"
     },
     "./*": {
       "require": "./cjs/*.cjs",
-      "import": "./modules/*.js"
+      "import": "./esm/*.js"
     },
     "./*.js": {
       "require": "./cjs/*.cjs",
-      "import": "./modules/*.js"
+      "import": "./esm/*.js"
     }
   },
   "private": false,

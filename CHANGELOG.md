@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.4] - 2023-06-05
+
+### Added
+- `url` module with `pathToURL()` & `pathToURL()`
+
+### Fixed
+- Fix path for esm `exports` (#8)
+- Fix matched importmap resolving to URL (using `pathToURL()`)
+
+### Changed
+
+- `importmap` updates & fixes
+
 ## [v1.0.3] - 2023-06-05
 
 ### Fixed

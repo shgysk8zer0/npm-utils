@@ -3,8 +3,9 @@
  * For the sake of browser compatibility, no `node:fs` or node-only
  * modules may be added to this script - It MUST be browser compatible.
  */
-import { isObject, findLongestMatch, isBare, isPath } from './utils.js';
+import { isObject, findLongestMatch, isBare } from './utils.js';
 import { ROOT } from './consts.js';
+import { pathToURL } from './url.js';
 
 export const objectToMap = ({ imports = {} }) => new Map(Object.entries(imports));
 
@@ -44,17 +45,23 @@ export function resolveImport(specifier, importmap, {
 	if (isObject(importmap)) {
 		return resolveImport(specifier, objectToMap(importmap));
 	} else if (importmap.has(specifier)) {
-		return importmap.get(specifier);
-	} else if (specifier.startsWith('/')) {
-		return new URL(`.${specifier}`, base);
-	} else if (['file:', './', '../'].some(pre => specifier.startsWith(pre))) {
-		return new URL(specifier, base);
+		const resolved = importmap.get(specifier);
+
+		if (resolved instanceof URL) {
+			return resolved;
+		} else {
+			const path = pathToURL(resolved, base);
+			importmap.set(specifier, path);
+			return path;
+		}
+	} else if (! isBare(specifier)) {
+		return pathToURL(specifier, base);
 	} else if (specifier.includes('/')) {
 		const match = findLongestMatch(specifier, ...importmap.keys());
 
 		if (typeof match === 'string') {
 			const resolved = specifier.replace(match, importmap.get(match));
-			const url = isPath(base) ? new URL(resolved) : new URL(resolved, base);
+			const url = pathToURL(resolved, base);
 			importmap.set(specifier, url);
 			return url;
 		}

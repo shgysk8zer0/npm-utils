@@ -5,5 +5,6 @@ export * as hash from './esm/hash.js';
 export * as importmap from './esm/importmap.js';
 export * as json from './esm/json.js';
 export * as MIMES from './esm/mimes.js';
+export * as url from './esm/url.js';
 export * as utils from './esm/utils.js';
 export * as yaml from './esm/yaml.js';
