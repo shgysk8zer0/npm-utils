@@ -10,5 +10,6 @@ export default {
 		dir: './cjs/',
 		format: 'cjs',
 		entryFileNames: '[name].cjs',
+		chunkFileNames: '[name]-[hash].cjs',
 	},
 };

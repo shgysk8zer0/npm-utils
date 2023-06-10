@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Install `@shgysk8zer0/js-utils`
 
+### Fixed
+- Correctly output chunks named `[name]-[hash].cjs` instead of `.js` ext
+
 ### Removed
 - Uninstall `rollup` and `eslint`
 
