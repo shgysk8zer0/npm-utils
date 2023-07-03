@@ -39,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shgysk8zer0/npm-template.git"
+    "url": "git+https://github.com/shgysk8zer0/npm-utils.git"
   },
   "author": "Chris Zuber <admin@kernvalley.us>",
   "license": "MIT",
