@@ -9,7 +9,7 @@ export const ENCODING = 'utf8';
 
 export async function ls(dir, { encoding = ENCODING, filter } = {}) {
 	const items = await readdir(dir, { withFileTypes: true, encoding });
-	const cwd = `${process.cwd()}/`
+	const cwd = `${process.cwd()}/`;
 
 	if (filter instanceof Function) {
 		return items.filter(filter).map(({ name }) => resolve(cwd, dir, name).replace(cwd, './'));
