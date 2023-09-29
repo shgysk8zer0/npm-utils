@@ -1,13 +1,13 @@
+import { extname } from 'node:path';
+import { YAML as EXTS } from '@shgysk8zer0/consts/exts.js';
 import { load, dump } from 'js-yaml';
-import { readFile, writeFile, ENCODING, getFileExtension } from './fs.js';
+import { readFile, writeFile, ENCODING } from './fs.js';
 import { LF } from './consts.js';
-export { YAML as MIMES } from './mimes.js';
-import { YAML as EXTS } from './exts.js';
 
 export const SPACES = 2;
 
 export function isYAMLFile(path) {
-	const ext = getFileExtension(path);
+	const ext = extname(path);
 	return EXTS.includes(ext);
 }
 

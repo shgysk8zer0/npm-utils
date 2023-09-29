@@ -6,6 +6,7 @@ node_modules/
 .htmlhintrc
 .gitattributes
 .gitignore
+.gitkeep
 .nvmrc
 importmap.json
 importmap.yaml

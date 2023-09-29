@@ -1,11 +1,11 @@
-import { ENCODING, readFile, writeFile, getFileExtension } from './fs.js';
-export { JSON as MIMES } from './mimes.js';
-import { JSON as EXTS } from './exts.js';
+import { extname } from 'node:path';
+import { JSON as EXTS } from '@shgysk8zer0/consts/exts.js';
+import { ENCODING, readFile, writeFile } from './fs.js';
 
 export const SPACES = 2;
 
 export function isJSONFile(path) {
-	const ext = getFileExtension(path);
+	const ext = extname(path);
 	return EXTS.includes(ext);
 }
 

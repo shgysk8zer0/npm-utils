@@ -1,4 +1,4 @@
-export const URL_PREFIXES = ['https:', 'http:'];
+export const URL_PREFIXES = ['https:', 'http:', 'blob:', 'data:'];
 export const PATH_PREFIXES = ['file:', '/', './', '../'];
 
 export const isString = str => typeof str === 'string';
