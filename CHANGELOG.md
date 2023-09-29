@@ -6,6 +6,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.2] - 2023-09-29
+
+### Added
+- Install `@shgysk8zer0/consts` and `@rollup/plugin-node-resolve`
+- Add support for working with `File` and `Blob` objects
+- Add module with functions for form validation
+
+### Fixed
+- Fix typo in `fix:js` script
+
+### Changed
+- Move all modules from `esm/` to project root
+
+## [v1.1.1] - 2023-09-26
+
+### Added
+- Install `@shgysk8zer0/consts` as dependency
+- Add function to read files as `File` objects (requires node >=20)
+- Add validation module
+
+### Changed
+- `blob:` and `data:` are now valid URL protocols for `isURL()`
+
+### Removed
+- Delete own versions of `EXTS` & `MIMES`
+
 ## [v1.1.0] - 2023-07-03
 
 ### Changed

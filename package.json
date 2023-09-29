@@ -1,6 +1,6 @@
 {
   "name": "@shgysk8zer0/npm-utils",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A collection of helpful functions for npm packages.",
   "type": "module",
   "main": "cjs/index.cjs",
@@ -15,11 +15,19 @@
     },
     "./*": {
       "require": "./cjs/*.cjs",
-      "import": "./esm/*.js"
+      "import": "./*.js"
     },
     "./*.js": {
       "require": "./cjs/*.cjs",
-      "import": "./esm/*.js"
+      "import": "./*.js"
+    },
+    "./*.mjs": {
+      "require": "./cjs/*.cjs",
+      "import": "./*.js"
+    },
+    "./*.cjs": {
+      "require": "./cjs/*.cjs",
+      "import": "./*.js"
     }
   },
   "private": false,
@@ -28,9 +36,9 @@
     "preversion": "npm test",
     "prepare": "npm run build",
     "lint:js": "eslint .",
-    "fix:js": "eslint. --fix",
+    "fix:js": "eslint . --fix",
     "build": "npm run build:js",
-    "build:js": "rollup -c rollup.config.js",
+    "build:js": "rm -f ./cjs/*.cjs && rollup -c rollup.config.js",
     "create:lock": "npm i --package-lock-only --ignore-scripts --no-audit --no-fund",
     "version:bump": "npm run version:bump:patch",
     "version:bump:patch": "npm version --no-git-tag-version patch && npm run create:lock",
@@ -48,9 +56,11 @@
   },
   "homepage": "https://github.com/shgysk8zer0/npm-utils#readme",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.1",
     "@shgysk8zer0/js-utils": "^1.0.0"
   },
   "dependencies": {
+    "@shgysk8zer0/consts": "^1.0.6",
     "js-yaml": "^4.1.0"
   }
 }
