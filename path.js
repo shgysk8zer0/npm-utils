@@ -1,0 +1,50 @@
+import { pathToFileURL, fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { URL_PREFIXES, ROOT } from './consts.js';
+
+export function getFileURL(path, base = ROOT.pathname) {
+	if (path instanceof URL && path.prototcol === 'file:') {
+		return path;
+	} else if (base instanceof URL) {
+		return base.protocol === 'file:'
+			? getFileURL(path, base.pathname)
+			: getFileURL(path, base.href);
+	} else if (typeof path !== 'string') {
+		throw new TypeError('path must be a file: URL or string.');
+	} else if (path.startsWith('file:')) {
+		return new URL(path);
+	} else if (URL_PREFIXES.some(protocol => path.startsWith(protocol)))  {
+		return path;
+	} else {
+		const resolved = resolve(base.startsWith('file:') ? fileURLToPath(base) : base, path);
+		return pathToFileURL(resolved);
+	}
+}
+
+export function resolvePath(url) {
+	if (url instanceof URL && url.protocol === 'file:') {
+		return fileURLToPath(url);
+	} else if (typeof url !== 'string') {
+		throw new TypeError('url must be a file: URL or string.');
+	} else if (url.startsWith('file:')) {
+		return fileURLToPath(url);
+	} else if (URL_PREFIXES.some(protocol => url.startsWith(protocol))) {
+		return url;
+	} else {
+		return resolve(url);
+	}
+}
+
+export function getRelativePath(path, base = ROOT.href) {
+	if (path instanceof URL)  {
+		return getRelativePath(path.protocol === 'file:' ? fileURLToPath(path) : path.href, base);
+	} else if (base instanceof URL) {
+		return getRelativePath(path, base.protocol === 'file:' ? fileURLToPath(base) : base.href);
+	} else if (typeof path !== 'string' || typeof base !=='string') {
+		throw new TypeError('Path and base must be a strings or URLs.');
+	} else if (path.startsWith(base)) {
+		return resolvePath(path).replace(base, './');
+	} else {
+		return path;
+	}
+}

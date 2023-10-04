@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `path.js` with methods for normalizing paths & converting from/to `file:` URLs
+
+### Fixed
+- File operations now work with `file:` URLs or paths
+
 ## [v1.1.1] - 2023-09-29
 
 ### Added

@@ -1,6 +1,7 @@
-export const URL_PREFIXES = ['https:', 'http:', 'blob:', 'data:'];
-export const PATH_PREFIXES = ['file:', '/', './', '../'];
+// export const URL_PREFIXES = ['https:', 'http:', 'blob:', 'data:'];
+// export const PATH_PREFIXES = ['file:', '/', './', '../'];
 
+import { URL_PREFIXES, PATH_PREFIXES } from './consts.js';
 export const isString = str => typeof str === 'string';
 export const isObject  = thing => typeof thing === 'object'
 	&&  ! Object.is(thing, null)

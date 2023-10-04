@@ -1,9 +1,10 @@
 /* eslint-env node */
 import { constants } from 'node:fs';
 import { readFile as read,  writeFile as write, stat, realpath, readdir } from 'node:fs/promises';
-import { extname, basename, resolve } from 'node:path';
+import { resolve, extname, basename } from 'node:path';
 import * as EXTS from '@shgysk8zer0/consts/exts.js';
 import * as MIMES from '@shgysk8zer0/consts/mimes.js';
+import { resolvePath } from './path.js';
 
 export const ENCODING = 'utf8';
 
@@ -32,23 +33,27 @@ export async function listDirByExt(dir, ext, { encoding = ENCODING, absolute = f
 }
 
 export async function readFile(path, { encoding = ENCODING, signal } = {}) {
-	return read(path, { encoding, signal });
+	if ('Blob' in globalThis && path instanceof Blob) {
+		return await path.text();
+	} else {
+		return read(resolvePath(path), { encoding,  signal });
+	}
 }
 
 export async function writeFile(path, data, { encoding = ENCODING, signal } = {}) {
 	if ('Blob' in globalThis && data instanceof Blob) {
-		await saveFile(path, data, { encoding, signal });
-	} else {
-		await write(path, data, { encoding, signal });
+		await saveFile(resolvePath(path), data, { encoding, signal });
+	} else if (path instanceof URL && path) {
+		await write(resolvePath(path), data, { encoding, signal });
 	}
 }
 
 export async function fileExists(path) {
-	return await stat(path).then(s => s.isFile(), () => false);
+	return await stat(resolvePath(path)).then(s => s.isFile(), () => false);
 }
 
 export async function directoryExists(path) {
-	return await stat(path).then(s => s.isDirectory(), () => false);
+	return await stat(resolvePath(path)).then(s => s.isDirectory(), () => false);
 }
 
 export async function realPath(path) {
@@ -80,15 +85,16 @@ export function getMimeType(path) {
 }
 
 export async function openFile(path) {
-	const [{ buffer }, { mtime = Date.now() }] = await Promise.all([read(path), stat(path)]);
-	const name = basename(path);
+	const resolved = resolvePath(path);
+	const [{ buffer }, { mtime = Date.now() }] = await Promise.all([read(resolved), stat(resolved)]);
+	const name = basename(resolved);
 	const type = getMimeType(name);
 
 	return new File([buffer], name, { type, lastModified: mtime.getTime() });
 }
 
 export async function saveFile(path, file, { encoding = ENCODING, signal } = {}) {
-	await write(path, Buffer.from(await file.arrayBuffer()), { encoding, signal });
+	await write(resolvePath(path), Buffer.from(await file.arrayBuffer()), { encoding, signal });
 }
 
 export { constants };

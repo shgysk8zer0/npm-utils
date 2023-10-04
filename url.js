@@ -1,15 +1,17 @@
 import { ROOT } from './consts.js';
 import { isPath, isURL } from './utils.js';
+import { getFileURL } from './path.js';
 
 export function pathToURL(path, base = ROOT) {
 	if (path instanceof URL) {
 		return path;
 	} else if (isPath(base)) {
 		// Absolute paths should be relative to project root/base
-		return new URL(
+		return getFileURL(path, base);
+		/*return new URL(
 			path.startsWith('/') ? `.${path}` : path,
 			`file://${base.replace('file://', '')}`
-		);
+		);*/
 	} else if (isURL(base) || base instanceof URL) {
 		return new URL(path, base);
 	} else {
@@ -18,10 +20,16 @@ export function pathToURL(path, base = ROOT) {
 }
 
 export function validateURL(path, base) {
-	try {
-		new URL(path, base);
+	if (path instanceof URL) {
 		return true;
-	} catch {
-		return false;
+	} else if (URL.canParse instanceof Function) {
+		return URL.canParse(path, base);
+	} else {
+		try {
+			new URL(path, base);
+			return true;
+		} catch {
+			return false;
+		}
 	}
 }
