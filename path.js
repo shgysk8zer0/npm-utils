@@ -1,9 +1,29 @@
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { resolve } from 'node:path';
+import { resolve, isAbsolute as isAbs } from 'node:path';
 import { URL_PREFIXES, ROOT } from './consts.js';
+import { validateURL } from './url.js';
+
+export function isAbsolute(path) {
+	if (path instanceof URL) {
+		return true;
+	} else if (typeof path !== 'string') {
+		return false;
+	} else if (path.startsWith('file:') && validateURL(path)) {
+		const url = new URL(path);
+		return isAbs(url.pathname) && path.endsWith(url.pathname);
+	} else if (URL_PREFIXES.some(protocol => path.startsWith(protocol))) {
+		const url = new URL(path);
+		console.log({ url: url.href, path });
+		return url.href === path && isAbsolute(url.pathname);
+	} else {
+		return isAbs(path);
+	}
+}
+
+export const isRelative = path => ! isAbsolute(path);
 
 export function getFileURL(path, base = ROOT.pathname) {
-	if (path instanceof URL && path.prototcol === 'file:') {
+	if (path instanceof URL && path.protocol === 'file:') {
 		return path;
 	} else if (base instanceof URL) {
 		return base.protocol === 'file:'
@@ -35,7 +55,7 @@ export function resolvePath(url) {
 	}
 }
 
-export function getRelativePath(path, base = ROOT.href) {
+export function getRelativePath(path, base = ROOT.pathname) {
 	if (path instanceof URL)  {
 		return getRelativePath(path.protocol === 'file:' ? fileURLToPath(path) : path.href, base);
 	} else if (base instanceof URL) {
