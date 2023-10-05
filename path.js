@@ -1,5 +1,5 @@
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { resolve, isAbsolute as isAbs } from 'node:path';
+import { resolve, isAbsolute as isAbs, dirname as dir, sep } from 'node:path';
 import { URL_PREFIXES, ROOT } from './consts.js';
 import { validateURL } from './url.js';
 
@@ -13,7 +13,6 @@ export function isAbsolute(path) {
 		return isAbs(url.pathname) && path.endsWith(url.pathname);
 	} else if (URL_PREFIXES.some(protocol => path.startsWith(protocol))) {
 		const url = new URL(path);
-		console.log({ url: url.href, path });
 		return url.href === path && isAbsolute(url.pathname);
 	} else {
 		return isAbs(path);
@@ -21,6 +20,10 @@ export function isAbsolute(path) {
 }
 
 export const isRelative = path => ! isAbsolute(path);
+
+export const dirname = path => dir(path) + '/';
+
+export const cwd = () => pathToFileURL(process.cwd() + sep);
 
 export function getFileURL(path, base = ROOT.pathname) {
 	if (path instanceof URL && path.protocol === 'file:') {
