@@ -10,10 +10,6 @@ export function pathToURL(path, base = ROOT.pathname) {
 	} else if (isPath(path) && isPath(base)) {
 		// Absolute paths should be relative to project root/base
 		return getFileURL(path.startsWith('/') ? `.${path}` : path, base);
-		/*return new URL(
-			path.startsWith('/') ? `.${path}` : path,
-			`file://${base.replace('file://', '')}`
-		);*/
 	} else if (isURL(base) || base instanceof URL) {
 		return new URL(path, base);
 	} else {
