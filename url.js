@@ -5,7 +5,9 @@ import { getFileURL } from './path.js';
 export function pathToURL(path, base = ROOT.pathname) {
 	if (path instanceof URL) {
 		return path;
-	} else if (isPath(base)) {
+	} else if (isURL(path)) {
+		return new URL(path);
+	} else if (isPath(path) && isPath(base)) {
 		// Absolute paths should be relative to project root/base
 		return getFileURL(path.startsWith('/') ? `.${path}` : path, base);
 		/*return new URL(
