@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.3]  - 2024-05-21
+
+### Fixed
+- Handle all cases for `path` when writing files
+- Resolve weird issue when `import * as FOO` is used in building with esbuild
+
 ## [v1.1.2] - 2023-10-05
 
 ### Added

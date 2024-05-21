@@ -4,7 +4,10 @@ import { readFile as read,  writeFile as write, stat, realpath, readdir } from '
 import { resolve, extname, basename } from 'node:path';
 import * as EXTS from '@shgysk8zer0/consts/exts.js';
 import * as MIMES from '@shgysk8zer0/consts/mimes.js';
-import { resolvePath } from './path.js';
+import { resolvePath, getFileURL } from './path.js';
+
+const ALL_EXTS = 'default' in EXTS ? EXTS.default : EXTS;
+const ALL_MIMES = 'default' in MIMES ? MIMES.default : MIMES;
 
 export const ENCODING = 'utf8';
 
@@ -45,6 +48,10 @@ export async function writeFile(path, data, { encoding = ENCODING, signal } = {}
 		await saveFile(resolvePath(path), data, { encoding, signal });
 	} else if (path instanceof URL && path) {
 		await write(resolvePath(path), data, { encoding, signal });
+	} else if (typeof path === 'string') {
+		await writeFile(getFileURL(path), data, { signal });
+	} else {
+		throw new TypeError('Invalid path.');
 	}
 }
 
@@ -75,10 +82,10 @@ export function replaceExtension(path, ext) {
 
 export function getMimeType(path) {
 	const ext = extname(path).toLowerCase();
-	const [key] = Object.entries(EXTS).find(([,exts]) => exts.includes(ext)) ?? [];
+	const [key] = Object.entries(ALL_EXTS).find(([,exts]) => exts.includes(ext)) ?? [];
 
 	if (typeof key === 'string') {
-		return MIMES[key] ?? '';
+		return ALL_MIMES[key] ?? '';
 	} else {
 		return '';
 	}
@@ -93,8 +100,8 @@ export async function openFile(path) {
 	return new File([buffer], name, { type, lastModified: mtime.getTime() });
 }
 
-export async function saveFile(path, file, { encoding = ENCODING, signal } = {}) {
-	await write(resolvePath(path), Buffer.from(await file.arrayBuffer()), { encoding, signal });
+export async function saveFile(path, file, { signal } = {}) {
+	await write(resolvePath(path), Buffer.from(await file.arrayBuffer()), { signal });
 }
 
 export { constants };
