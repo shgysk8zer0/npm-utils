@@ -1,6 +1,6 @@
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { resolve, isAbsolute as isAbs, dirname as dir, sep } from 'node:path';
-import { URL_PREFIXES, ROOT } from './consts.js';
+import { WEB_PREFIXES, ROOT } from './consts.js';
 import { validateURL } from './url.js';
 
 export function isAbsolute(path) {
@@ -11,7 +11,7 @@ export function isAbsolute(path) {
 	} else if (path.startsWith('file:') && validateURL(path)) {
 		const url = new URL(path);
 		return isAbs(url.pathname) && path.endsWith(url.pathname);
-	} else if (URL_PREFIXES.some(protocol => path.startsWith(protocol))) {
+	} else if (WEB_PREFIXES.some(protocol => path.startsWith(protocol))) {
 		const url = new URL(path);
 		return url.href === path && isAbsolute(url.pathname);
 	} else {
@@ -36,7 +36,7 @@ export function getFileURL(path, base = ROOT.pathname) {
 		throw new TypeError('path must be a file: URL or string.');
 	} else if (path.startsWith('file:')) {
 		return new URL(path);
-	} else if (URL_PREFIXES.some(protocol => path.startsWith(protocol)))  {
+	} else if (WEB_PREFIXES.some(protocol => path.startsWith(protocol)))  {
 		return path;
 	} else {
 		const resolved = resolve(base.startsWith('file:') ? fileURLToPath(base) : base, path);
@@ -51,7 +51,7 @@ export function resolvePath(url) {
 		throw new TypeError('url must be a file: URL or string.');
 	} else if (url.startsWith('file:')) {
 		return fileURLToPath(url);
-	} else if (URL_PREFIXES.some(protocol => url.startsWith(protocol))) {
+	} else if (WEB_PREFIXES.some(protocol => url.startsWith(protocol))) {
 		return url;
 	} else {
 		return resolve(url);
