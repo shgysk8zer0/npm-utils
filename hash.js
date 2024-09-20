@@ -1,5 +1,4 @@
 import { createHash } from 'node:crypto';
-// import { webcrypto } from 'node:crypto';
 
 const sris = new Map();
 const ENCODING = 'utf8';
