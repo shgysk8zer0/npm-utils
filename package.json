@@ -57,6 +57,7 @@
   "homepage": "https://github.com/shgysk8zer0/npm-utils#readme",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.1",
+    "@shgysk8zer0/eslint-config": "^1.0.1",
     "@shgysk8zer0/js-utils": "^1.0.0"
   },
   "dependencies": {

@@ -11,4 +11,4 @@ export const FTP_PREFIXES = ['git:', 'ssh:', 'ftp:', 'ftps:', 'sftp:', 'dav:', '
 export const PATH_PREFIXES = ['file:', '/', './', '../'];
 export const ROOT = 'process' in globalThis && process.cwd instanceof Function
 	? pathToFileURL(`${process.cwd()}/`)
-	: 'document' in globalThis ? new URL(document.baseURI) : null;
+	: 'document' in globalThis ? new URL(globalThis.document.baseURI) : null;
