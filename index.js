@@ -1,3 +1,4 @@
+import '@shgysk8zer0/polyfills';
 export * as consts from './consts.js';
 export * as EXTS from '@shgysk8zer0/consts/exts.js';
 export * as fs from './fs.js';
