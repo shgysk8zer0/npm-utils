@@ -1,5 +1,4 @@
 import { createHash } from 'node:crypto';
-// import { webcrypto } from 'node:crypto';
 
 const sris = new Map();
 const ENCODING = 'utf8';
@@ -16,8 +15,8 @@ export const SHA3_224 = 'sha3-224';
 export const SHA3_256 = 'sha3-256';
 export const SHA3_384 = 'sha3-384';
 export const SHA3_512 = 'sha3-512';
-export const DEFAULT_ALGO = SHA384;
 export const SRI_ALGO = SHA384;
+export const DEFAULT_ALGO = SHA384;
 
 /**
  * Output encoding constants

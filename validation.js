@@ -16,7 +16,7 @@ export const between = (val, { min = Number.MIN_SAFE_INTEGER, max = Number.MAX_S
 export const isDate = (str) => {
 	try {
 		return ! Number.isNaN(new Date(str).getTime());
-	} catch(e) {
+	} catch {
 		return false;
 	}
 };
@@ -71,7 +71,7 @@ export const validateMessageHeaders = ({ headers: {
 			const hash = createHash(algo.toLowerCase())
 				.update(JSON.stringify({ uuid, date, origin })).digest('hex');
 			return hash === signature;
-		} catch(e) {
+		} catch {
 			return false;
 		}
 	}

@@ -57,10 +57,12 @@
   "homepage": "https://github.com/shgysk8zer0/npm-utils#readme",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.1",
+    "@shgysk8zer0/eslint-config": "^1.0.1",
     "@shgysk8zer0/js-utils": "^1.0.0"
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.6",
+    "@shgysk8zer0/polyfills": "^0.4.3",
     "js-yaml": "^4.1.0"
   }
 }
