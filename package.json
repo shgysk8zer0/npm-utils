@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.6",
-    "@shgysk8zer0/polyfills": "^0.4.3",
+    "@shgysk8zer0/polyfills": "^0.5.0",
     "js-yaml": "^4.1.0"
   }
 }
