@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { createHash } from 'node:crypto';
 
 export const between = (val, { min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER } = {}) => {

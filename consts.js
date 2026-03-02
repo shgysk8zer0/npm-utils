@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { pathToFileURL } from 'node:url';
 
 export const LF = '\n';

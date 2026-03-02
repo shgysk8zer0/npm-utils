@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { constants } from 'node:fs';
 import { readFile as read,  writeFile as write, stat, realpath, readdir } from 'node:fs/promises';
 import { resolve, extname, basename } from 'node:path';
