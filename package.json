@@ -1,6 +1,6 @@
 {
   "name": "@shgysk8zer0/npm-utils",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "A collection of helpful functions for npm packages.",
   "type": "module",
   "main": "cjs/index.cjs",
@@ -62,7 +62,10 @@
   },
   "dependencies": {
     "@shgysk8zer0/consts": "^1.0.8",
-    "@shgysk8zer0/polyfills": "^0.6.3",
+    "@shgysk8zer0/polyfills": "^0.8.1",
     "js-yaml": "^4.1.1"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
   }
 }
